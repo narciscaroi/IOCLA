@@ -1,0 +1,55 @@
+CAROI NARCIS-FLORIN 323CD
+
+bruteforce_singlebyte_xor ->  Iau fiecare element din vector si fara sa
+			modific fac cu o cheie data pana gasesc cuvantul. Tratand
+			imaginea ca vector, adica in loc de (i * latime + offset),
+			eu parcurg imaginea ca vector. Din aceasta cauza impart
+			registrul in care retin pozita elementului la latimea pe
+			care ar fi trebuit sa o aiba matricea. Dupa impartire,  am
+			in edx offsetul, iar in eax linia, apoi inmultind eax
+			cu latimea matricii, voi avea indicele primului element
+			de pe linia unde am gasit cuvantul si printez pana la \0;
+
+encode_message-> Apelez functia de la task1, dar cu parametru astfel
+		inca sa stiu la ce task sunt si la task2 nu trebuie printate
+		atat valorile cat si mesajul.
+			  -> Preiau datele de la task1, parcurg imaginea si ii
+		aplic xor intre toate elementele cu cheia veche pentru a
+		decoda matricea.
+			  -> Calculez cheia mea, scriu mesajul la urmatoarea
+		linie fata de cea pe care am gasit mesajul si encodez
+		imaginea cu cheia mea.
+
+encode_by_morse (PS : scuze pentru implementarea de la acest task, dar
+		initial am inteles ca trebuie facut altceva si in alt mod nu aveai cum,
+		nu am mai modificat tot, doar chestiile care erau schimbate.)
+			-> Iau fiecare char din string, verific care este si il trec
+		in matrice in functie de codul sau morse.
+
+seeNbit -> Iau din functia care encodeaza iteratia la care ma aflu si scad
+		din nr max de shiftari(7) iteratia la care sunt(ce bit imi
+		trebuie). Returnez 0 daca este setat si 1 daca este setat bitul
+		de care am nevoie.
+
+lsb_encode -> Iau char-ul pe care vreau sa il encodez, apelez functia
+		prezentata mai sus pentru a-mi returna ce tip de bit trebuie
+		sa pun.
+		   -> In caz ca acesta este 0, fac "&" intre numarul din matrice
+		si o maska(254 = 11111110), care imi resteaza ultimul bit.
+		   -> Daca bit-ul este 1, pe langa operatia de mai sus, adun
+		si 1 la numar.
+
+lsb_decode -> Parcurg fiecare numar de la index-ul dat(aparent index-1)
+		si aplic operatia logica "&" intre fiecare numar si maska
+		1(reprez pe biti :  00000001) care imi pastreaza ultimul
+		bit. Dupa ce "adun" 8 biti, printez char-ul in functie de
+		cei 8 biti pe care i-am gasit.
+			-> "Adun" biti, adica cand gasesc un bit, shiftez
+		registrul in care retin bitii cu 1, si adun bit-ul.
+			->Cand gasesc 8 biti consecutivi de 0 => null terminator
+		=> ies din functe.
+
+blur -> In principiu, am 2 loop-uri mari : primul imi calculeaza
+	fiecare valoare care trebuie pusa in matrice in loc de una existenta
+	si o trimite pe stiva, a doua imi parcurge in ordine inversa matricea
+	si imi inlocuieste valorile
